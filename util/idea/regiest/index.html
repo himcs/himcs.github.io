@@ -11,7 +11,7 @@
 
     <title>
         
-          Excerpts - mcs
+          util/idea/regiest - mcs
         
     </title>
 
@@ -163,11 +163,27 @@ function sidebar_toggle() {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <p>The following contents should be invisible in home/archive page.</p>
-<a id="more"></a>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eget urna vitae velit eleifend interdum at ac nisi. In nec ligula lacus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed eu cursus erat, ut dapibus quam. Aliquam eleifend dolor vitae libero pharetra adipiscing. Etiam adipiscing dolor a quam tempor, eu convallis nulla varius. Aliquam sollicitudin risus a porta aliquam. Ut nec velit dolor. Proin eget leo lobortis, aliquam est sed, mollis mauris. Fusce vitae leo pretium massa accumsan condimentum. Fusce malesuada gravida lectus vel vulputate. Donec bibendum porta nibh ut aliquam.</p>
-<p>Sed lorem felis, congue non fringilla eu, aliquam eu eros. Curabitur orci libero, mollis sed semper vitae, adipiscing in lectus. Aenean non egestas odio. Donec sollicitudin nisi quis lorem gravida, in pharetra mauris fringilla. Duis sit amet faucibus dolor, id aliquam neque. In egestas, odio gravida tempor dictum, mauris felis faucibus purus, sit amet commodo lacus diam vitae est. Ut ut quam eget massa semper sodales. Aenean non ipsum cursus, blandit lectus in, ornare odio. Curabitur ultrices porttitor vulputate.</p>
-
+  <p>复制即可使用<br>
+<textarea id='codeContainer' rows="33" cols="66"><br>
+</textarea></p>
+<script src="https://cdn.bootcss.com/clipboard.js/2.0.6/clipboard.min.js"></script>
+<script>
+let downloadTxtUrl = "http://idea.medeming.com/jets/images/jihuoma.txt";
+let postData = {action:'GET',data:downloadTxtUrl}
+fetch('http://test.hudoufc.com/test.php',{
+        method: "POST",
+        headers: {
+         'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: JSON.stringify(postData)
+    })
+  .then((response) =>{
+    return response.text();
+  })
+  .then((txt)=> {
+        document.getElementById('codeContainer').innerHTML = txt;
+    });
+</script>
 </div>
 
 
@@ -206,7 +222,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2013-12-25</div>
+      <div>2020-04-09</div>
     </div>
   </div>
 
