@@ -58,9 +58,10 @@ document.addEventListener('DOMContentLoaded', function () {
   </a>
 </div>
     <div class="book-menu">
-  <h1 id="Home"><a href="/hexo-theme-book-demo">Home</a></h1>
+  <h1 id="Home"><a href="/home">Home</a></h1>
 <h2 id="hexo">hexo</h2>
 <ul>
+<li><a href="/note/hexo/travis-with-hexo">搭建与发布</a></li>
 <li><a href="/hexo-theme-book-demo/test/hexo-unit-test/categories">Categories</a></li>
 <li><a href="/hexo-theme-book-demo/test/hexo-unit-test/elements">Elements</a></li>
 <li><a href="/hexo-theme-book-demo/test/hexo-unit-test/excerpts">Excerpts</a></li>
@@ -86,6 +87,9 @@ document.addEventListener('DOMContentLoaded', function () {
 <ul>
 <li>
 <p><a href="/util/idea/regiest">IDEA CODE</a></p>
+</li>
+<li>
+<p><a href="/util/ssr/getssr">SSR</a></p>
 </li>
 <li>
 <p><a href="/hexo-theme-book-demo/demo/menu-realtime">Menu Realtime Demo</a></p>
@@ -163,24 +167,11 @@ function sidebar_toggle() {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <p>复制即可使用<br>
-<textarea id='codeContainer' rows="33" cols="66"><br>
-</textarea></p>
-<script src="https://cdn.bootcss.com/clipboard.js/2.0.6/clipboard.min.js"></script>
+  <p>复制即可使用</p>
+<textarea id='codeContainer' rows="33" cols="66"></textarea>
+<script src="/js/api.js" ></script>
 <script>
-let downloadTxtUrl = "http://idea.medeming.com/jets/images/jihuoma.txt";
-let postData = {action:'GET',data:downloadTxtUrl}
-fetch('http://test.hudoufc.com/test.php',{
-        method: "POST",
-        headers: {
-         'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: JSON.stringify(postData)
-    })
-  .then((response) =>{
-    return response.text();
-  })
-  .then((txt)=> {
+    apiClient.getIdeaCode().then((txt)=> {
         document.getElementById('codeContainer').innerHTML = txt;
     });
 </script>

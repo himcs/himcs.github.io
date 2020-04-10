@@ -11,7 +11,7 @@
 
     <title>
         
-          www.google.com - mcs
+          util/ssr/getssr - mcs
         
     </title>
 
@@ -167,8 +167,45 @@ function sidebar_toggle() {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <p>This is a link post without a title. The title should be the link with or without protocol. Clicking on the link should open <a href="http://www.google.com/" target="_blank" rel="noopener">Google</a> in a new tab or window.</p>
+  <div id="app">
+    <input type="text" v-model="key"></input>
+    <div>
+        ~{ res }
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+<script src="/js/api.js"></script>
+<script>
+var app = new Vue({
+el: '#app',
+delimiters: ['~{', '}'],
+created() {
+this.upSSR = (n) => {
 
+apiClient.getSSR(n).then((data) => {
+if (data.code == 0) this.res = data.data;
+<!--        else alert(data.msg);-->
+});
+
+
+}
+},
+data: {
+key: '',
+res: '',
+},
+
+watch: {
+
+key(n, o) {
+this.upSSR(n);
+},
+
+}
+
+})
+</script>
 </div>
 
 
@@ -207,7 +244,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2013-12-24</div>
+      <div>2020-04-10</div>
     </div>
   </div>
 
