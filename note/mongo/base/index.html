@@ -59,23 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
     <div class="book-menu">
   <h1 id="Home"><a href="/home">Home</a></h1>
-<h2 id="hexo">hexo</h2>
-<ul>
-<li><a href="/note/hexo/travis-with-hexo">搭建与发布</a></li>
-</ul>
-<h2 id="linux">linux</h2>
-<ul>
-<li><a href="/note/linux/server-move">PHP项目迁移</a></li>
-<li><a href="/note/linux/svn-cantup">SVN文件无法更新</a></li>
-<li><a href="/note/linux/ssr-create">SSR服务搭建</a></li>
-<li><a href="/note/linux/scrapy-env">Scrapy运行环境搭建</a></li>
-</ul>
 <h2 id="PHP">PHP</h2>
 <ul>
 <li><a href="/note/php/PHP">面试题</a></li>
 <li><a href="/note/php/ext">安装扩展</a></li>
 <li><a href="/note/php/srv">环境搭建</a></li>
 <li><a href="/note/php/nginxconf">Nginx配置</a></li>
+<li><a href="/note/linux/server-move">PHP项目迁移</a></li>
 </ul>
 <h2 id="Java">Java</h2>
 <ul>
@@ -83,15 +73,28 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/note/java/core/1ObjectsAndClasses">对象与实例</a></li>
 <li><a href="/note/java/core/2Extends">继承</a></li>
 </ul>
+<h2 id="scrapy爬虫">scrapy爬虫</h2>
+<ul>
+<li><a href="/note/scrapy/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">环境搭建</a></li>
+<li><a href="/note/scrapy/scrapy-env">Linux Python3+Scrapy运行环境搭建</a></li>
+<li><a href="/note/scrapy/scrapy%E9%83%A8%E7%BD%B2">部署</a></li>
+</ul>
 <h2 id="mongo">mongo</h2>
 <ul>
 <li><a href="/note/mongo/base">mongo基础</a></li>
 <li><a href="/note/mongo/aggregate">聚合查询</a></li>
 </ul>
+<h2 id="版本控制">版本控制</h2>
+<ul>
+<li><a href="/note/svn/svn_auto_update">SVN自动更新</a></li>
+<li><a href="/note/svn/svn-cantup">SVN文件无法更新</a></li>
+</ul>
 <h2 id="工具">工具</h2>
 <ul>
+<li><a href="/note/hexo/travis-with-hexo">Hexo搭建与发布</a></li>
 <li><a href="/util/idea/regiest">IDEA CODE</a></li>
 <li><a href="/util/ssr/getssr">SSR</a></li>
+<li><a href="/note/linux/ssr-create">SSR服务搭建</a></li>
 <li><a href="/util/lxjs">利息计算</a></li>
 <li><a href="/hexo-theme-book-demo/demo/menu-realtime">Menu Realtime Demo</a></li>
 </ul>
@@ -123,10 +126,6 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/hexo-theme-book-demo/demo/render/katex-demo">katex demo</a></li>
 <li><a href="/hexo-theme-book-demo/demo/render/footnotes-demo">footnotes demo</a></li>
 <li><a href="/hexo-theme-book-demo/demo/render/md-container">markdown-container</a></li>
-</ul>
-<h2 id="Test">Test</h2>
-<ul>
-<li><a href="/hexo-theme-book-demo/test/socket/socket-io">Socket IO </a></li>
 </ul>
 
 </div>
@@ -187,7 +186,7 @@ function sidebar_toggle() {
           <div class="book-post">
   <h1 id="One-World">One World</h1>
 <p>MongoDB 由一系列包含<code>collections</code>的<code>database</code>组成</p>
-<h1 id="层次">层次</h1>
+<h2 id="层次">层次</h2>
 <ul>
 <li>
 <p><code>database</code> 对应于 SQL 中的 database</p>
@@ -201,6 +200,38 @@ function sidebar_toggle() {
 <li>
 <p><code>fields</code> <code>doucment</code>中的字段</p>
 </li>
+</ul>
+<h2 id="连接">连接</h2>
+<p>运行<code>mongo.exe</code>进入shell交互</p>
+<h2 id="查看帮助">查看帮助</h2>
+<p><code>db.help()</code></p>
+<h2 id="数据库">数据库</h2>
+<h3 id="创建">创建</h3>
+<p>使用即创建，例如使用<code>mydb</code></p>
+<p><code>use myd;</code></p>
+<h3 id="查看">查看</h3>
+<p><code>show dbs;</code></p>
+<h3 id="删除">删除</h3>
+<p>选中数据库后执行</p>
+<p><code>db.dropDatabase()</code></p>
+<h2 id="集合">集合</h2>
+<h3 id="查看当前数据库下所有的集合">查看当前数据库下所有的集合</h3>
+<p><code>show collections</code></p>
+<h3 id="删除-v2">删除</h3>
+<p><code>db.collection.dropDatabase()</code></p>
+<h2 id="文档">文档</h2>
+<p>集合是由文档组成</p>
+<h3 id="插入文档">插入文档</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.insert(<span class="built_in">document</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="查找文档">查找文档</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.COLLECTION_NAME.find();</span><br></pre></td></tr></table></figure>
+<h3 id="更新文档">更新文档</h3>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.collection.update( criteria, objNew, upsert, multi );</span><br></pre></td></tr></table></figure>
+<ul>
+<li>criteria : update的查询条件，类似sql update查询内where后面的。</li>
+<li>objNew : update的对象和一些更新的操作符（如<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">,</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3em;vertical-align:-0.19444em;"></span><span class="mpunct">,</span></span></span></span>inc…）等，也可以理解为sql update查询内set后面的</li>
+<li>upsert : 这个参数的意思是，如果不存在update的记录，是否插入objNew,true为插入，默认是false，不插入。</li>
+<li>multi : mongodb默认是false,只更新找到的第一条记录，如果这个参数为true,就把按条件查出来多条记录全部更新。</li>
 </ul>
 
 </div>
@@ -241,7 +272,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2020-04-24</div>
+      <div>2020-06-04</div>
     </div>
   </div>
 

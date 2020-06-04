@@ -59,23 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
     <div class="book-menu">
   <h1 id="Home"><a href="/home">Home</a></h1>
-<h2 id="hexo">hexo</h2>
-<ul>
-<li><a href="/note/hexo/travis-with-hexo">搭建与发布</a></li>
-</ul>
-<h2 id="linux">linux</h2>
-<ul>
-<li><a href="/note/linux/server-move">PHP项目迁移</a></li>
-<li><a href="/note/linux/svn-cantup">SVN文件无法更新</a></li>
-<li><a href="/note/linux/ssr-create">SSR服务搭建</a></li>
-<li><a href="/note/linux/scrapy-env">Scrapy运行环境搭建</a></li>
-</ul>
 <h2 id="PHP">PHP</h2>
 <ul>
 <li><a href="/note/php/PHP">面试题</a></li>
 <li><a href="/note/php/ext">安装扩展</a></li>
 <li><a href="/note/php/srv">环境搭建</a></li>
 <li><a href="/note/php/nginxconf">Nginx配置</a></li>
+<li><a href="/note/linux/server-move">PHP项目迁移</a></li>
 </ul>
 <h2 id="Java">Java</h2>
 <ul>
@@ -83,15 +73,28 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/note/java/core/1ObjectsAndClasses">对象与实例</a></li>
 <li><a href="/note/java/core/2Extends">继承</a></li>
 </ul>
+<h2 id="scrapy爬虫">scrapy爬虫</h2>
+<ul>
+<li><a href="/note/scrapy/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">环境搭建</a></li>
+<li><a href="/note/scrapy/scrapy-env">Linux Python3+Scrapy运行环境搭建</a></li>
+<li><a href="/note/scrapy/scrapy%E9%83%A8%E7%BD%B2">部署</a></li>
+</ul>
 <h2 id="mongo">mongo</h2>
 <ul>
 <li><a href="/note/mongo/base">mongo基础</a></li>
 <li><a href="/note/mongo/aggregate">聚合查询</a></li>
 </ul>
+<h2 id="版本控制">版本控制</h2>
+<ul>
+<li><a href="/note/svn/svn_auto_update">SVN自动更新</a></li>
+<li><a href="/note/svn/svn-cantup">SVN文件无法更新</a></li>
+</ul>
 <h2 id="工具">工具</h2>
 <ul>
+<li><a href="/note/hexo/travis-with-hexo">Hexo搭建与发布</a></li>
 <li><a href="/util/idea/regiest">IDEA CODE</a></li>
 <li><a href="/util/ssr/getssr">SSR</a></li>
+<li><a href="/note/linux/ssr-create">SSR服务搭建</a></li>
 <li><a href="/util/lxjs">利息计算</a></li>
 <li><a href="/hexo-theme-book-demo/demo/menu-realtime">Menu Realtime Demo</a></li>
 </ul>
@@ -123,10 +126,6 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/hexo-theme-book-demo/demo/render/katex-demo">katex demo</a></li>
 <li><a href="/hexo-theme-book-demo/demo/render/footnotes-demo">footnotes demo</a></li>
 <li><a href="/hexo-theme-book-demo/demo/render/md-container">markdown-container</a></li>
-</ul>
-<h2 id="Test">Test</h2>
-<ul>
-<li><a href="/hexo-theme-book-demo/test/socket/socket-io">Socket IO </a></li>
 </ul>
 
 </div>
@@ -192,6 +191,59 @@ function sidebar_toggle() {
 <p>理论上加<code>Manager</code>与<code>Employee</code>之间是<code>is-a</code>的关系，即每一个经理都是一个员工。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span> <span class="keyword">extends</span> <span class="title">Employee</span></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>​	java使用<code>extends</code>关键字来表示继承关系。已存在的类被称为超类，基类或父类，新类称之为子类，派生类或孩子类。Java程序员一般使用超类和子类术语表达这种关系。</p>
+<h2 id="Object-类">Object 类</h2>
+<p>Object是所有类的超类，Java总除了基本类型不是对象，数组和基本类型数组都是<code>Object</code>的子类。</p>
+<h3 id="equals-方法">equals 方法</h3>
+<p><code>Object</code>中的<code>equals</code>方法用来检测另一个对象是否等于当前对象。</p>
+<p>Java 要求 <code>equals</code>方法有以下特性：</p>
+<ol>
+<li>自反性 任何非空x x.equals(x) 返回 true</li>
+<li>对称性 x.equals(y) == y.equals(x)</li>
+<li>传递性 如果x.equals(y) y.equlas(z) 则 x.equals(z);</li>
+<li>一致性 如果x，y引用对象无变化，反复调用x.equals(y)结果相同</li>
+<li>非空引用x x.equals(null) 返回false</li>
+</ol>
+<p>设计一个完美<code>equals</code>的步骤</p>
+<ol>
+<li>
+<p>显式参数命名为<code>otherObject</code></p>
+</li>
+<li>
+<p>检测<code>this</code>和<code>otherObject</code>是否引用同一个对象</p>
+<p><code>if (this == otherObject) return true;</code></p>
+</li>
+<li>
+<p>检测<code>otherObject</code>是否为<code>null</code>,为<code>null</code>返回<code>false</code></p>
+<p><code>if (null == otherObject) return true;</code></p>
+</li>
+<li>
+<p>检测<code>this</code>与<code>otherObject</code>是否为同一个类，如果<code>equals</code>语义在之类中要有所改变，就使用<code>getClass</code>检测</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(getClass() !&#x3D; otherObject.getClass())</span><br><span class="line">   return false;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果之类语义相同，使用<code>instanceof</code>检测<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;true</span><br><span class="line">new Person() instanceof Object</span><br></pre></td></tr></table></figure><br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (!(otherObject instanceof ClassName))</span><br><span class="line">	return false;</span><br></pre></td></tr></table></figure></p>
+<pre><code>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">	</span><br></pre></td></tr></table></figure>
+</code></pre>
+<ol start="5">
+<li>将<code>otherObject</code>转换为需要的类型变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CLassName other &#x3D; (ClassName) otherObject;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>进行域比较，使用<code>==</code>比较基本类型 , 使用<code>equals</code>比较对象域,数组可以使用<code>Arrays.equlas</code>比较,如果所有域都相等,返回<code>true</code>,否则返回<code>false</code>;</li>
+</ol>
+<h3 id="hashCode-方法">hashCode 方法</h3>
+<p><code>hashCode</code>是由一个对象导出的一个<code>int</code>值，散列码是没有规律的。</p>
+<p><code>Object</code>默认的<code>hashCode</code>就是对象内存存储地址。</p>
+<p>如果重新定义<code>equals</code>方法，就必须重新定义<code>hashCode</code>方法，以便用户可以将对象插入到散列表中。</p>
+<p>数组的<code>hashCode</code>可以使用<code>Arrays.hashCode</code>计算。</p>
+<h3 id="toString方法">toString方法</h3>
+<p>类用来返回对象值的字符串。</p>
+<p>Java重载了<code>String</code>类型的<code>+</code>操作，当一个字符串 <code>+</code>一个对象时，会调用该对象的<code>toString()</code>方法。</p>
+<p>数组可以使用<code>Arrays.toString()</code>来展示。</p>
+<h3 id="clone">clone</h3>
+<p>创建一个对象的副本。</p>
 
 </div>
 
@@ -231,7 +283,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2020-05-22</div>
+      <div>2020-06-04</div>
     </div>
   </div>
 

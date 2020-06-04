@@ -11,7 +11,7 @@
 
     <title>
         
-          server-move - book-note
+          scrapy 环境搭建 - book-note
         
     </title>
 
@@ -59,23 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
     <div class="book-menu">
   <h1 id="Home"><a href="/home">Home</a></h1>
-<h2 id="hexo">hexo</h2>
-<ul>
-<li><a href="/note/hexo/travis-with-hexo">搭建与发布</a></li>
-</ul>
-<h2 id="linux">linux</h2>
-<ul>
-<li><a href="/note/linux/server-move">PHP项目迁移</a></li>
-<li><a href="/note/linux/svn-cantup">SVN文件无法更新</a></li>
-<li><a href="/note/linux/ssr-create">SSR服务搭建</a></li>
-<li><a href="/note/linux/scrapy-env">Scrapy运行环境搭建</a></li>
-</ul>
 <h2 id="PHP">PHP</h2>
 <ul>
 <li><a href="/note/php/PHP">面试题</a></li>
 <li><a href="/note/php/ext">安装扩展</a></li>
 <li><a href="/note/php/srv">环境搭建</a></li>
 <li><a href="/note/php/nginxconf">Nginx配置</a></li>
+<li><a href="/note/linux/server-move">PHP项目迁移</a></li>
 </ul>
 <h2 id="Java">Java</h2>
 <ul>
@@ -83,15 +73,28 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/note/java/core/1ObjectsAndClasses">对象与实例</a></li>
 <li><a href="/note/java/core/2Extends">继承</a></li>
 </ul>
+<h2 id="scrapy爬虫">scrapy爬虫</h2>
+<ul>
+<li><a href="/note/scrapy/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">环境搭建</a></li>
+<li><a href="/note/scrapy/scrapy-env">Linux Python3+Scrapy运行环境搭建</a></li>
+<li><a href="/note/scrapy/scrapy%E9%83%A8%E7%BD%B2">部署</a></li>
+</ul>
 <h2 id="mongo">mongo</h2>
 <ul>
 <li><a href="/note/mongo/base">mongo基础</a></li>
 <li><a href="/note/mongo/aggregate">聚合查询</a></li>
 </ul>
+<h2 id="版本控制">版本控制</h2>
+<ul>
+<li><a href="/note/svn/svn_auto_update">SVN自动更新</a></li>
+<li><a href="/note/svn/svn-cantup">SVN文件无法更新</a></li>
+</ul>
 <h2 id="工具">工具</h2>
 <ul>
+<li><a href="/note/hexo/travis-with-hexo">Hexo搭建与发布</a></li>
 <li><a href="/util/idea/regiest">IDEA CODE</a></li>
 <li><a href="/util/ssr/getssr">SSR</a></li>
+<li><a href="/note/linux/ssr-create">SSR服务搭建</a></li>
 <li><a href="/util/lxjs">利息计算</a></li>
 <li><a href="/hexo-theme-book-demo/demo/menu-realtime">Menu Realtime Demo</a></li>
 </ul>
@@ -123,10 +126,6 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/hexo-theme-book-demo/demo/render/katex-demo">katex demo</a></li>
 <li><a href="/hexo-theme-book-demo/demo/render/footnotes-demo">footnotes demo</a></li>
 <li><a href="/hexo-theme-book-demo/demo/render/md-container">markdown-container</a></li>
-</ul>
-<h2 id="Test">Test</h2>
-<ul>
-<li><a href="/hexo-theme-book-demo/test/socket/socket-io">Socket IO </a></li>
 </ul>
 
 </div>
@@ -185,12 +184,16 @@ function sidebar_toggle() {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <h2 id="问题">问题</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Skipped &#39;index.html&#39; -- Node remains in conflict</span><br></pre></td></tr></table></figure>
-<h2 id="答案">答案</h2>
-<p>恢复文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert --depth&#x3D;infinity index.html</span><br></pre></td></tr></table></figure>
-
+  <h1 id="安装Python3">安装Python3</h1>
+<p>这里使用的是源码安装方式，其他版本类似</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">yum -y groupinstall &quot;Development tools&quot; </span><br><span class="line"></span><br><span class="line">yum -y install gcc</span><br><span class="line"></span><br><span class="line">yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel</span><br><span class="line"></span><br><span class="line">yum -y install libffi-devel</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">wget http:&#x2F;&#x2F;npm.taobao.org&#x2F;mirrors&#x2F;python&#x2F;3.7.7&#x2F;Python-3.7.7.tgz</span><br><span class="line"></span><br><span class="line">tar -zxvf Python-3.7.7.tgz</span><br><span class="line"></span><br><span class="line">cd Python-3.7.7</span><br><span class="line"></span><br><span class="line">.&#x2F;configure --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;python3</span><br><span class="line"></span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"></span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;python3&#x2F;bin&#x2F;python3.7 &#x2F;usr&#x2F;bin&#x2F;python3</span><br><span class="line"></span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;python3&#x2F;bin&#x2F;pip3 &#x2F;usr&#x2F;bin&#x2F;pip3</span><br></pre></td></tr></table></figure>
+<h1 id="pip安装依赖">pip安装依赖</h1>
+<p><code>-i</code> 是使用指定源下载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip3 install -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple scrapy</span><br><span class="line">pip3 install -i https:&#x2F;&#x2F;pypi.tuna.tsinghua.edu.cn&#x2F;simple pymongo</span><br><span class="line"></span><br><span class="line">ln -s &#x2F;usr&#x2F;local&#x2F;python3&#x2F;bin&#x2F;scrapy  &#x2F;usr&#x2F;bin&#x2F;scrapy</span><br></pre></td></tr></table></figure>
+<h1 id="mongo-恢复数据">mongo 恢复数据</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongoimport -h 127.0.0.1 -d test --type&#x3D;json --file&#x3D;shangquan.json</span><br><span class="line">mongoimport -h 127.0.0.1 -d test --type&#x3D;json --file&#x3D;quyu.json</span><br><span class="line">mongoimport -h 127.0.0.1 -d test --type&#x3D;json --file&#x3D;house.json</span><br></pre></td></tr></table></figure>
+<h1 id="运行脚本">运行脚本</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrapy crawl mySpider</span><br></pre></td></tr></table></figure>
 </div>
 
 
@@ -229,7 +232,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2020-04-10</div>
+      <div>2020-04-23</div>
     </div>
   </div>
 
@@ -239,7 +242,7 @@ function sidebar_toggle() {
     <div class="link">
       <a class="category-link" href="/categories/linux/">linux</a>
 
-      <a class="tag-link" href="/tags/svn/" rel="tag">#svn</a>
+      <a class="tag-link" href="/tags/linux/" rel="tag">#linux</a> <a class="tag-link" href="/tags/python/" rel="tag">#python</a> <a class="tag-link" href="/tags/scrapy/" rel="tag">#scrapy</a>
     </div>
     
   
