@@ -184,273 +184,30 @@ function sidebar_toggle() {
 
         </div>
         <div class="book-content">
-          <div class='book-archive'>
-  <!-- Title -->
-  
-    <h1>Archives</h1>
-  
+          
+<article id="page">
+  <h1></h1>
+  <h1 id="Mysql">Mysql</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">wget -i -c http:&#x2F;&#x2F;dev.mysql.com&#x2F;get&#x2F;mysql57-community-release-el7-10.noarch.rpm</span><br><span class="line">yum -y install mysql57-community-release-el7-10.noarch.rpm</span><br><span class="line">yum -y install mysql-community-server</span><br><span class="line">systemctl start  mysqld.service</span><br><span class="line">systemctl status mysqld.service</span><br><span class="line">systemctl enable mysqld</span><br><span class="line">systemctl daemon-reload</span><br><span class="line">grep &quot;password&quot; &#x2F;var&#x2F;log&#x2F;mysqld.log</span><br><span class="line">mysql -u root -p</span><br></pre></td></tr></table></figure>
+<h1 id="防火墙">防火墙</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">systemctl status firewalld</span><br><span class="line">systemctl start firewalld</span><br><span class="line">firewall-cmd --zone=public --add-port=3306/tcp --permanent;</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<h1 id="Nginx">Nginx</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install epel-release -y</span><br><span class="line">yum install nginx</span><br><span class="line">service nginx status</span><br><span class="line">systemctl start nginx.service</span><br><span class="line">systemctl enable nginx</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<h1 id="PHP">PHP</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/yum.repos.d</span><br><span class="line">wget http://dev.centos.org/centos/5/CentOS-Testing.repo</span><br><span class="line">rpm –import http://dev.centos.org/centos/RPM-GPG-KEY-CentOS-testing</span><br><span class="line">yum install -y php php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt libmcrypt-devel php-fpm</span><br><span class="line">systemctl enable php-fpm</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<h1 id="配置-Nginx">配置 Nginx</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/nginx/nginx.conf /etc/nginx/nginx.confbak</span><br><span class="line">vi /etc/nginx/nginx.conf</span><br><span class="line">cp /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.confbak</span><br><span class="line">vi /etc/php-fpm.d/www.conf</span><br><span class="line">systemctl restart mysqld.service</span><br><span class="line">systemctl restart nginx.service</span><br><span class="line">systemctl restart php-fpm</span><br><span class="line">chmod -R 777 /var/lib/php/session</span><br></pre></td></tr></table></figure>
+<h1 id="Svn">Svn</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">svn list https://svnSite/svn/</span><br><span class="line">svn checkout https://svnSite/svn/ /mnt/nginx/</span><br><span class="line">cd /mnt/nginx/</span><br></pre></td></tr></table></figure>
+<h1 id="定时服务">定时服务</h1>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crontab -e</span><br><span class="line">systemctl start crond</span><br><span class="line">systemctl status crond</span><br><span class="line">systemctl reload crond</span><br></pre></td></tr></table></figure>
 
-  
-    <!-- Split post by year -->
-    
-  
+</article>
 
-  
-      <div class="years">
-          <h2>2020</h2>
-          <ul class="archive-list-item">
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/home/">
-                  Home
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/xml/UMLway/">
-                  xml/UMLway
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/util/lxjs/">
-                  util/lxjs
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/util/idea/regiest/">
-                  util/idea/regiest
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/util/ssr/getssr/">
-                  util/ssr/getssr
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/menu/">
-                  menu
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/render/md-container/">
-                  hexo-theme-book-demo/demo/render/md-container
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/render/markdown-it-demo/">
-                  hexo-theme-book-demo/demo/render/markdown-it-demo
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/render/katex-demo/">
-                  hexo-theme-book-demo/demo/render/katex-demo
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/render/footnotes-demo/">
-                  hexo-theme-book-demo/demo/render/footnotes-demo
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/tc-demo/">
-                  繁體中文
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/sc-demo/">
-                  简体中文
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/kr-demo/">
-                  Korean
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/jp-demo/">
-                  Japanese
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/en-demo/">
-                  English
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/menu-realtime/">
-                  hexo-theme-book-demo/demo/menu-realtime
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/test/bugfix/list-test/">
-                  hexo-theme-book-demo/test/bugfix/list-test
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/test/bugfix/blockquote-position/">
-                  hexo-theme-book-demo/test/bugfix/blockquote-position
-                </a>
-              </li>
-          
-          </ul>
-      </div>
-  
-      <div class="years">
-          <h2>2013</h2>
-          <ul class="archive-list-item">
-          
-              <li>
-                <span>2013-12-26</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/images/">
-                  Images
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/no-title/">
-                  hexo-theme-book-demo/test/hexo-unit-test/no-title
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/excerpts/">
-                  Excerpts
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/videos/">
-                  Videos
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/gallery-post/">
-                  Gallery Post
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/tag-plugins/">
-                  Tag Plugins
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/link-post-without-title/">
-                  www.google.com
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/日本語テスト/">
-                  日本語テスト
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/中文測試/">
-                  中文測試
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/long-title/">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam justo turpis, tincidunt ac convallis id.
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/socket/socket-io/">
-                  Categories
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/categories/">
-                  Categories
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/link-post/">
-                  Link Post
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/tags/">
-                  Tags
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/elements/">
-                  Elements
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/hello-world/">
-                  Hello World
-                </a>
-              </li>
-          
-          </ul>
-      </div>
-  
-
+<div id="paginator">
   
 </div>
+
         </div>
       </div>
       <div class="column col-2 hide-lg">
@@ -474,7 +231,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div></div>
+      <div>2020-06-09</div>
     </div>
   </div>
 

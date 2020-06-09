@@ -1,0 +1,10 @@
+SecurityContextHolder 保存了当前使用的 上下文环境策略
+初始化时，默认采用线程模式，即一个线程具有相同的安全上下文。MODE_THREADLOCAL 模式 底层采用ThreadLocal存储信息。
+当前版本有三种模式，线程模式，传播线程模式，全局模式。
+传播线程是说由安全线程产生的线程会共享相同的安全信息上下文。
+
+Authentication存储了当前安全信息
+获取方式       
+`SecurityContextHolder.getContext().getAuthentication();`
+
+AuthenticationManager 用来验证给定的 Authentication 不通过抛出异常

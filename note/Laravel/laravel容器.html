@@ -184,273 +184,58 @@ function sidebar_toggle() {
 
         </div>
         <div class="book-content">
-          <div class='book-archive'>
-  <!-- Title -->
-  
-    <h1>Archives</h1>
-  
+          
+<article id="page">
+  <h1></h1>
+  <h1 id="Laravel-容器分析">Laravel 容器分析</h1>
+<h2 id="为什么有容器">为什么有容器?</h2>
+<p>管理类的依赖和执行依赖注入,实现控制的反转.<br>
+说人话: 定义和使用接口,而不是具体实现,用容器来绑定实现</p>
+<h2 id="Laravel的容器实现">Laravel的容器实现</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">namespace Illuminate\Container;</span><br><span class="line"></span><br><span class="line">class Container implements ArrayAccess, ContainerContract&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ArrayAccess">ArrayAccess</h3>
+<p>官方介绍</p>
+<blockquote>
+<p>提供像访问数组一样访问对象的能力的接口。</p>
+</blockquote>
+<p>即类提供<code>$className['key']</code>访问的能力</p>
+<h3 id="ContainerContract">ContainerContract</h3>
+<p>即契约接口,框架提供的接口.那这个接口能做什么呢?</p>
+<p>容器 可以看作一个存放实例的数组</p>
+<p>理解<code>Laravel</code>容器的核心概念</p>
+<ol>
+<li>绑定</li>
+<li>别名</li>
+<li>tag</li>
+<li>单例模式</li>
+</ol>
+<h4 id="绑定">绑定</h4>
+<h5 id="注册绑定">注册绑定</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;在容器中注册绑定</span><br><span class="line">public function bind($abstract, $concrete &#x3D; null, $shared &#x3D; false);</span><br><span class="line">&#x2F;&#x2F;尝试绑定(如果 给定接口未被绑定)</span><br><span class="line">public function bindIf($abstract, $concrete &#x3D; null, $shared &#x3D; false);</span><br><span class="line">&#x2F;&#x2F;绑定一个已存在的实例</span><br><span class="line">public function instance($abstract, $instance);</span><br><span class="line">&#x2F;&#x2F;绑定为单例模式</span><br><span class="line">public function singleton($abstract, $concrete &#x3D; null);</span><br><span class="line">&#x2F;&#x2F;上下文绑定(根据相应的条件,返回相应的实例)</span><br><span class="line">public function addContextualBinding($concrete, $abstract, $implementation);</span><br><span class="line">&#x2F;&#x2F;修改已绑定的类型</span><br><span class="line">public function extend($abstract, Closure $closure);</span><br></pre></td></tr></table></figure>
+<p>上下文绑定<br>
+<code>when</code>方法返回一个<code>ContextualBindingBuilder</code></p>
+<h5 id="获取实现">获取实现</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;通过接口名称 获取容器中注册的实例</span><br><span class="line">public function make($abstract, array $parameters &#x3D; []);</span><br><span class="line">&#x2F;&#x2F;检测是否已经绑定</span><br><span class="line">public function bound($abstract);</span><br></pre></td></tr></table></figure>
+<h4 id="别名">别名</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;注册别名</span><br><span class="line">public function alias($abstract, $alias);</span><br></pre></td></tr></table></figure>
+<h3 id="tag">tag</h3>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;注册tag(即依赖数组一个名字)</span><br><span class="line">public function tag($abstracts, $tags);</span><br><span class="line">&#x2F;&#x2F;解析tag(返回一个iterable,解析依赖数组)</span><br><span class="line">public function tagged($tag);</span><br></pre></td></tr></table></figure>
+<h3 id="单例模式">单例模式</h3>
+<p>整个容器内只存在一个实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;声明单例</span><br><span class="line">public function singleton($abstract, $concrete &#x3D; null);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interface Container extends ContainerInterface</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface ContainerInterface</span><br><span class="line">&#123;</span><br><span class="line">   public function get($id);</span><br><span class="line">   public function has($id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到 接口继承了<code>Psr\Container;</code>即<code> PSR-11</code>,所以可以使用</p>
+<blockquote>
+<p><code> PSR-11 容器 『接口类型提示』 来获取 Laravel 容器的实例：</code></p>
+</blockquote>
 
-  
-    <!-- Split post by year -->
-    
-  
+</article>
 
-  
-      <div class="years">
-          <h2>2020</h2>
-          <ul class="archive-list-item">
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/home/">
-                  Home
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/xml/UMLway/">
-                  xml/UMLway
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/util/lxjs/">
-                  util/lxjs
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/util/idea/regiest/">
-                  util/idea/regiest
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/util/ssr/getssr/">
-                  util/ssr/getssr
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/menu/">
-                  menu
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/render/md-container/">
-                  hexo-theme-book-demo/demo/render/md-container
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/render/markdown-it-demo/">
-                  hexo-theme-book-demo/demo/render/markdown-it-demo
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/render/katex-demo/">
-                  hexo-theme-book-demo/demo/render/katex-demo
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/render/footnotes-demo/">
-                  hexo-theme-book-demo/demo/render/footnotes-demo
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/tc-demo/">
-                  繁體中文
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/sc-demo/">
-                  简体中文
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/kr-demo/">
-                  Korean
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/jp-demo/">
-                  Japanese
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/lorem-ipsum/en-demo/">
-                  English
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/demo/menu-realtime/">
-                  hexo-theme-book-demo/demo/menu-realtime
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/test/bugfix/list-test/">
-                  hexo-theme-book-demo/test/bugfix/list-test
-                </a>
-              </li>
-          
-              <li>
-                <span>2020-06-09</span>
-                <a href="/hexo-theme-book-demo/test/bugfix/blockquote-position/">
-                  hexo-theme-book-demo/test/bugfix/blockquote-position
-                </a>
-              </li>
-          
-          </ul>
-      </div>
-  
-      <div class="years">
-          <h2>2013</h2>
-          <ul class="archive-list-item">
-          
-              <li>
-                <span>2013-12-26</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/images/">
-                  Images
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/no-title/">
-                  hexo-theme-book-demo/test/hexo-unit-test/no-title
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/excerpts/">
-                  Excerpts
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/videos/">
-                  Videos
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/gallery-post/">
-                  Gallery Post
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-25</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/tag-plugins/">
-                  Tag Plugins
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/link-post-without-title/">
-                  www.google.com
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/日本語テスト/">
-                  日本語テスト
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/中文測試/">
-                  中文測試
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/long-title/">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam justo turpis, tincidunt ac convallis id.
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/socket/socket-io/">
-                  Categories
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/categories/">
-                  Categories
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/link-post/">
-                  Link Post
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/tags/">
-                  Tags
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/elements/">
-                  Elements
-                </a>
-              </li>
-          
-              <li>
-                <span>2013-12-24</span>
-                <a href="/hexo-theme-book-demo/test/hexo-unit-test/hello-world/">
-                  Hello World
-                </a>
-              </li>
-          
-          </ul>
-      </div>
-  
-
+<div id="paginator">
   
 </div>
+
         </div>
       </div>
       <div class="column col-2 hide-lg">
@@ -474,7 +259,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div></div>
+      <div>2020-06-09</div>
     </div>
   </div>
 
