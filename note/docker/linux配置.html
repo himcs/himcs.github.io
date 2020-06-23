@@ -11,7 +11,7 @@
 
     <title>
         
-          hexo-theme-book-demo/demo/render/footnotes-demo - book-note
+          book-note
         
     </title>
 
@@ -184,93 +184,23 @@ function sidebar_toggle() {
 
         </div>
         <div class="book-content">
-          <div class="book-post">
-  <h1 id="Footnotes">Footnotes</h1>
-<p>You can hover on link to peek the content of footnotes.</p>
-<p>Please use markdown-it renderer, and install <a href="https://github.com/markdown-it/markdown-it-footnote" target="_blank" rel="noopener">markdown-it-footnote</a> plugin.</p>
-<h2 id="Example">Example</h2>
-<p>Footnote 1 link<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
-<p>Footnote 2 link<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>.</p>
-<p>Inline footnote<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> definition.</p>
-<p>Duplicated footnote reference<sup class="footnote-ref"><a href="#fn2" id="fnref2:1">[2:1]</a></sup>.</p>
-<h2 id="…">…</h2>
-<p>…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…<br>
-…</p>
-<hr class="footnotes-sep">
-<section class="footnotes">
-<ol class="footnotes-list">
-<li id="fn1" class="footnote-item"><p>Footnote <strong>can have markup</strong></p>
-<p>and multiple paragraphs. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn2" class="footnote-item"><p>Footnote text. <a href="#fnref2" class="footnote-backref">↩︎</a> <a href="#fnref2:1" class="footnote-backref">↩︎</a></p>
-</li>
-<li id="fn3" class="footnote-item"><p>Text of inline footnote <a href="#fnref3" class="footnote-backref">↩︎</a></p>
-</li>
-</ol>
-</section>
+          
+<article id="page">
+  <h1></h1>
+  <h2 id="安装">安装</h2>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"></span><br><span class="line"> yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line">yum install docker-ce</span><br></pre></td></tr></table></figure>
+<h2 id="配置Docker数据位置">配置Docker数据位置</h2>
+<p>修改<code>/usr/lib/systemd/system/docker.service</code> 中<code>ExecStart=/usr/bin/dockerd </code>部分所在的行，</p>
+<p>修改为</p>
+<p><code>ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock --data-root=/data/docker</code></p>
+<p>重启<code>docker</code>服务</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl daemon-reload</span><br><span class="line">service docker start</span><br></pre></td></tr></table></figure>
 
+</article>
+
+<div id="paginator">
+  
 </div>
-
-
-  <div class="book-comments">
-    
-
-
-
-
-  </div>
-
-
-
-<script src="/js/book-post.js"></script>
 
         </div>
       </div>
