@@ -209,6 +209,10 @@ function sidebar_toggle() {
 <p><code>1</code>=递增</p>
 <p><code>-1</code>=递减</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$sort:&#123;avgVamp:-1&#125;&#125; ])</span><br></pre></td></tr></table></figure>
+<h2 id="添加字段">添加字段</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">            $addFields: &#123;</span><br><span class="line">                &#39;total&#39;: &#123;</span><br><span class="line">                    $toDouble: &#39;$total&#39;</span><br><span class="line">                &#125;,</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="条件">条件</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">            $addFields: &#123;</span><br><span class="line">                score_mianji: &#123;</span><br><span class="line">                    $cond: [</span><br><span class="line">                        &#123;</span><br><span class="line">                               $lt: [&#39;$mianji&#39;, 150],</span><br><span class="line">                        &#125;,</span><br><span class="line">                        1,</span><br><span class="line">                        -1</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </article>
 
 <div id="paginator">
@@ -238,7 +242,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2020-06-23</div>
+      <div>2020-06-29</div>
     </div>
   </div>
 
