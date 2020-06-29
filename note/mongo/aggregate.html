@@ -189,6 +189,7 @@ function sidebar_toggle() {
   <h1></h1>
   <h1 id="aggregate">aggregate</h1>
 <p>数据聚合查询，类似于unix管道，数据流从一个个中间件经过。</p>
+<p>官方文档<a href="https://docs.mongodb.com/manual/meta/aggregation-quick-reference/" target="_blank" rel="noopener">aggregation-quick-reference</a></p>
 <h2 id="语法">语法</h2>
 <p>使用<code>aggregate()</code>,参数为一个聚合处理数组</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.getCollection(&quot;unicorns&quot;).aggregate([</span><br><span class="line">&#123;$group:&#123;_id:&#96;$gender&#96;,total:&#123;$sum:1&#125;&#125;&#125;</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
@@ -213,6 +214,9 @@ function sidebar_toggle() {
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">            $addFields: &#123;</span><br><span class="line">                &#39;total&#39;: &#123;</span><br><span class="line">                    $toDouble: &#39;$total&#39;</span><br><span class="line">                &#125;,</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="条件">条件</h2>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">            $addFields: &#123;</span><br><span class="line">                score_mianji: &#123;</span><br><span class="line">                    $cond: [</span><br><span class="line">                        &#123;</span><br><span class="line">                               $lt: [&#39;$mianji&#39;, 150],</span><br><span class="line">                        &#125;,</span><br><span class="line">                        1,</span><br><span class="line">                        -1</span><br><span class="line">                    ]</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="用途">用途</h2>
+<p>处理中间处理，可以聚合出最终结果.</p>
+
 </article>
 
 <div id="paginator">
