@@ -187,28 +187,44 @@ function sidebar_toggle() {
           
 <article id="page">
   <h1></h1>
-  <h1 id="Laravel-环境搭建">Laravel 环境搭建</h1>
-<h2 id="Homested-Box">Homested Box</h2>
+  <h1 id="Stream-库">Stream 库</h1>
+<p>在<code>Java SE 8</code>引用，用以“做什么而不是怎么做“来处理集合。</p>
+<h2 id="迭代-》流操作">迭代=》流操作</h2>
+<p>例如一段迭代字符串数组，并计算符合要求的元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">baseCount</span><span class="params">(String[] strings)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(String s : strings)</span><br><span class="line">    &#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用流操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">streamCount</span><span class="params">(String[] strings)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> count = Arrays.stream(strings).count();</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>stream</code>还可以并行处理和计数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">streamCount</span><span class="params">(String[] strings)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> count = Arrays.stream(strings).count();</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>流和集合的差异：</p>
+<ol>
+<li>流并不存储元素</li>
+<li>流操作不会修改原始数据</li>
+<li>流操作时惰性执行。即直到需要其结果，操作才会执行，因此我们可以操作无限流。</li>
+</ol>
+<h2 id="典型流程">典型流程</h2>
+<p>如下所示，流的操作：</p>
 <ol>
 <li>
-<p>安装 VirtualBox</p>
+<p>创建一个流</p>
 </li>
 <li>
-<p>安装 Vagrant</p>
+<p>将初始流转换为其他流的中间操作，可以有多个步骤</p>
+</li>
+<li>
+<p>终止操作，产生结果。这个操作会执行之前的惰性操作，这个流结束。</p>
 </li>
 </ol>
-<h3 id="VirtualBox">VirtualBox</h3>
-<p>虚拟机软件</p>
-<h3 id="Vagrant">Vagrant</h3>
-<p>管理虚拟机的软件</p>
-<h3 id="Homestead">Homestead</h3>
-<p>Laravel官方封装的Vagrant Box</p>
-<ul>
-<li>virtualbox.box 定制盒子</li>
-<li>metadata.json 配置文件</li>
-</ul>
-<p>导入官方box</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vagrant box add metadata.json</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回长度大于目标长度的元素数量。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">streamFilterCount</span><span class="params">(String[] strings, <span class="keyword">int</span> minLength)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> count = Arrays.asList(strings).stream().filter(x -&gt; x.length() &gt; minLength).count();</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="创建流的API">创建流的API</h2>
+<p><code>Collection</code>接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">default</span> Stream&lt;E&gt; <span class="title">stream</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">default</span> Stream&lt;E&gt; <span class="title">parallelStream</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>&lt;T&gt; Stream&lt;T&gt; <span class="title">of</span><span class="params">(T... values)</span></span></span><br></pre></td></tr></table></figure>
+<p><code>Arrays</code>方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Stream&lt;T&gt; <span class="title">stream</span><span class="params">(T[] array)</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="流操作API">流操作API</h2>
+<p><code>Stream&lt;T&gt; </code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stream&lt;T&gt; <span class="title">filter</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; predicate)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">count</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="filter-map-flatMap">filter map flatMap</h2>
 
 </article>
 
