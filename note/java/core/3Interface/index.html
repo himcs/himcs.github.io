@@ -285,7 +285,7 @@ Java SE 8 前，接口不能实现方法，8及以后可以定义默认方法。
 <h3 id="函数式接口">函数式接口</h3>
 <p>对于只有一个抽象方法的接口，当需要这种接口的对象时，可以提供太一个<code>lambda</code>表达式。这种接口成为函数式接口<code>functional interface</code>.</p>
 <blockquote>
-<p>接口可以提供非抽象方法，例如提供默认方法，静态方法，或者重新声明<code>Object</code>类对象的方法，都不会影响唯一的一个抽象方法，这个接口依然是函数式接口。</p>
+<p>接口可以提供非抽象方法，例如提供默认方法，静态方法，或者重新声明<code>Object</code>类对象的方法，都不会影响唯一的抽象方法，这个接口依然是函数式接口。</p>
 </blockquote>
 <p>例如<code>Compartor</code>接口是一个函数式接口</p>
 <p>可以如下调用：</p>
@@ -317,13 +317,140 @@ Java SE 8 前，接口不能实现方法，8及以后可以定义默认方法。
 <p>,使用<code>super</code>也是合法的。</p>
 <p>例如<code>super::toString</code></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> top.himcs.basic.inter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestLambda</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        TestLambda.test(TestLambda::printV2, <span class="keyword">new</span> Object[]&#123;<span class="string">"Hello"</span>, <span class="string">"World"</span>&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">(test t, Object... objects)</span> </span>&#123;</span><br><span class="line">        t.print(objects);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printV2</span><span class="params">(Object... objects)</span> </span>&#123;</span><br><span class="line">        System.out.println(Arrays.toString(objects));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@FunctionalInterface</span></span><br><span class="line">    <span class="class"><span class="keyword">interface</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(Object... objects)</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="存储函数表达式的接口">存储函数表达式的接口</h3>
+<p><code>java.util.function</code>下定义了很多通用的函数式接口。</p>
+<p>例如<code>BiFunction&lt;T, U, R&gt;</code>接受参数类型<code>T</code>和<code>U</code>，返回类型为<code>R</code>的函数,可以将我们的函数保存到这中类型的变量中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">BiFunction&lt;String, String, Integer&gt; function = (s1, s2) -&gt; &#123;</span><br><span class="line">    <span class="keyword">return</span> s1.length() - s2.length();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>Predicate&lt;T&gt;</code>是一个保存参数类型为<code>T</code>，返回结果为<code>boolean</code>的j函数接口,可以用来测试</p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Predicate&lt;String&gt; predicate &#x3D; s -&gt; &#123;</span><br><span class="line">    return s.isEmpty();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>ArrayList</code>有个<code>removeIf</code>方法，参数为一个<code>Predicate</code>。</p>
+<p>常用函数式表达式接口</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">接口</th>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">返回</th>
+<th style="text-align:center">方法名</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Runnable</td>
+<td style="text-align:center"></td>
+<td style="text-align:center">void</td>
+<td style="text-align:center">run</td>
+<td style="text-align:center">作为无参数或返回值的动作运行</td>
+</tr>
+<tr>
+<td style="text-align:center">Supplier<T></td>
+<td style="text-align:center"></td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">get</td>
+<td style="text-align:center">返回一个T类型的值</td>
+</tr>
+<tr>
+<td style="text-align:center">Consumer<T></td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">void</td>
+<td style="text-align:center">accept</td>
+<td style="text-align:center">处理一个T类型的值</td>
+</tr>
+<tr>
+<td style="text-align:center">BiConsumer&lt;T, U&gt;</td>
+<td style="text-align:center">T, U</td>
+<td style="text-align:center">void</td>
+<td style="text-align:center">accept</td>
+<td style="text-align:center">处理T和U类型</td>
+</tr>
+<tr>
+<td style="text-align:center">BiFunction&lt;T, U, R&gt;</td>
+<td style="text-align:center">T,U</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">apply</td>
+<td style="text-align:center">处理T和U类型，返回一个R类型</td>
+</tr>
+<tr>
+<td style="text-align:center">Function&lt;T, R&gt;</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">R</td>
+<td style="text-align:center">apply</td>
+<td style="text-align:center">处理T类型，返回一个R类型</td>
+</tr>
+<tr>
+<td style="text-align:center">UnaryOperator<T> extends Function&lt;T, T&gt;</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">apply</td>
+<td style="text-align:center">T类型的一元操作</td>
+</tr>
+<tr>
+<td style="text-align:center">BinaryOperator<T> extends BiFunction&lt;T,T,T&gt;</td>
+<td style="text-align:center">T,T</td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">apply</td>
+<td style="text-align:center">T类型的二元操作</td>
+</tr>
+<tr>
+<td style="text-align:center">Predicate<T></td>
+<td style="text-align:center">T</td>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">test</td>
+<td style="text-align:center">测试T的布尔值</td>
+</tr>
+<tr>
+<td style="text-align:center">BiPredicate&lt;T, U&gt;</td>
+<td style="text-align:center">T，U</td>
+<td style="text-align:center">boolean</td>
+<td style="text-align:center">test</td>
+<td style="text-align:center">两个参数的布尔值</td>
+</tr>
+</tbody>
+</table>
+<p>由于泛型只能为<code>Object</code>引用类型，基础类型要最好用专门的标准接口,这样可以减少装箱操作提高性能，例如处理<code>int</code>接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IntConsumer</span> </span>&#123;</span><br><span class="line">      <span class="function"><span class="keyword">void</span> <span class="title">accept</span><span class="params">(<span class="keyword">int</span> value)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果设计你自己的接口，其中只有一个抽象方法， 可以用<code>@FunctionalInterface</code> 注解来标记这个接口。</p>
+<p>这样做有两个优点。</p>
+<p>如果你无意中增加了另一个非抽象方法， 编译器会产生一个错误消息。</p>
+<p>另外javadoc 页里会指出你的接口是一个函数式接口。<br>
+并不是必须使用注解根据定义， 任何有一个抽象方法的接口都是函数式接口。不过使用<code>@FunctionalInterface</code> 注解确实是一个很好的做法。</p>
+</blockquote>
 <h3 id="构造器引用">构造器引用</h3>
 <p>构造器引用与方法引用类似，方法名为<code>new</code>例如<code>Person::new</code>是<code>Person</code>构造器的一个引用，具体调用哪个构造器，取决于上下文.</p>
 <p>例如</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; names = ...;</span><br><span class="line">Stream&lt;Person&gt; stream == names.streams().map(Person::<span class="keyword">new</span>);</span><br><span class="line">List&lt;Person&gt; people = stream.collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
 <p>数组也可以建立构造器引用,例如<code>int[]::new</code>,有一个参数，即数组的长度</p>
 <p>等价于<code>x-&gt;new int[x]</code></p>
+<p>Java有一个验证，无法构造泛型<code>T</code>的数组，表达式<code>new T[n]</code>会报错，并会改为<code>new Object[n]</code>.</p>
+<p>获取一个<code>Person</code>引用数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person[] people = stream.toArray(Person[]::<span class="keyword">new</span>)</span><br></pre></td></tr></table></figure>
+<p>下面这种方式不可以：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] ts = Arrays.asList(t1).stream().toArray(T[]::<span class="keyword">new</span>);</span><br></pre></td></tr></table></figure>
+<p>只能通过数组反射来构造泛型数组。</p>
+<p>如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; T[] get(Class&lt;T&gt; type,<span class="keyword">int</span> length) &#123;</span><br><span class="line">    T[] ts = (T[])Array.newInstance(type, length);</span><br><span class="line">    <span class="keyword">return</span> ts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="变量作用域">变量作用域</h3>
+<p>在<code>lamdba</code>表达式中可以直接访问外部的变量。</p>
+<p>可以理解为<code>lamdba</code>表达式转换为包含方法的一个对象，外部变量的值会复制到这个对象的实例变量中。</p>
+<p>在<code>lambda</code>中，只能引用值不会改变的变量。</p>
+<p><code>lamdba</code>中变量名不能和外部已有变量名的突。</p>
+<p>在<code>lamdba</code>中的<code>this</code>是值创建这个<code>lamdba</code>表达式的外部对象。</p>
+<p>例如</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> class <span class="title">Appliction</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">int</span><span class="params">()</span></span>&#123;</span><br><span class="line">        ActionListener listener = event -&gt; &#123;</span><br><span class="line">            System.out.println(<span class="keyword">this</span>.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的<code>this.toString()</code>会调用<code>Appliction</code>对象的<code>toString</code>方法。</p>
+<h3 id="处理lambda表达式">处理lambda表达式</h3>
+<p><code>lambda</code>的精髓在于延迟执行<code>deferred exection</code>，如果要立即执行，可以直接执行，无需包装在<code>lamdba</code>表达式中。</p>
+<p>可能要用到<code>lamdba</code>的原因：</p>
+<ol>
+<li>单独线程执行</li>
+<li>多次运行</li>
+<li>算法的适当位置(例如排序中的比较操作)</li>
+<li>事件回调（按钮点击，事件触发）</li>
+<li>必要时运行的代码</li>
+</ol>
 
 </div>
 
