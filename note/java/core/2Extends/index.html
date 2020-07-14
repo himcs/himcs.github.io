@@ -309,18 +309,66 @@ function sidebar_toggle() {
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if(getClass() !&#x3D; otherObject.getClass())</span><br><span class="line">   return false;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">如果之类语义相同，使用&#96;instanceof&#96;检测</span><br></pre></td></tr></table></figure>
-<pre><code>  //true
-  new Person() instanceof Object
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
-  if (!(otherObject instanceof ClassName))
-  	return false;
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果之类语义相同，使用<code>instanceof</code>检测</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;true</span><br><span class="line">new Person() instanceof Object</span><br></pre></td></tr></table></figure>
+<pre><code>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">if (!(otherObject instanceof ClassName))</span><br><span class="line">	return false;</span><br></pre></td></tr></table></figure>
     
-   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5. 将&#96;otherObject&#96;转换为需要的类型变量</span><br></pre></td></tr></table></figure>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"> </span><br></pre></td></tr></table></figure>
 </code></pre>
-<p>CLassName other = (ClassName) otherObject;</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">6. 进行域比较，使用&#96;&#x3D;&#x3D;&#96;比较基本类型 , 使用&#96;equals&#96;比较对象域,数组可以使用&#96;Arrays.equlas&#96;比较,如果所有域都相等,返回&#96;true&#96;,否则返回&#96;false&#96;;</span><br><span class="line"></span><br><span class="line">### hashCode 方法</span><br><span class="line"></span><br><span class="line">&#96;hashCode&#96;是由一个对象导出的一个&#96;int&#96;值，散列码是没有规律的。</span><br><span class="line"></span><br><span class="line">&#96;Object&#96;默认的&#96;hashCode&#96;就是对象内存存储地址。</span><br><span class="line"></span><br><span class="line">如果重新定义&#96;equals&#96;方法，就必须重新定义&#96;hashCode&#96;方法，以便用户可以将对象插入到散列表中。</span><br><span class="line"></span><br><span class="line">数组的&#96;hashCode&#96;可以使用&#96;Arrays.hashCode&#96;计算。</span><br><span class="line"></span><br><span class="line">### toString方法</span><br><span class="line"></span><br><span class="line">类用来返回对象值的字符串。</span><br><span class="line"></span><br><span class="line">Java重载了&#96;String&#96;类型的&#96;+&#96;操作，当一个字符串 &#96;+&#96;一个对象时，会调用该对象的&#96;toString()&#96;方法。</span><br><span class="line"></span><br><span class="line">数组可以使用&#96;Arrays.toString()&#96;来展示。</span><br><span class="line"></span><br><span class="line">### clone</span><br><span class="line"></span><br><span class="line">创建一个对象的副本。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 泛型数组</span><br><span class="line"></span><br><span class="line">使用底层数组必须在使用时确定数组的大小，使用&#96;ArrayList&#96;类可以不用关心底层细节，类会自动调节数组容量。</span><br><span class="line"></span><br><span class="line">&#96;ArrayList&#96;是一个采用了&#96;类型参数&#96;的泛型类(&#96;generic class)&#96;。即可以指定数组列表保存的元素对象类型。</span><br><span class="line"></span><br><span class="line">使用&#96;&lt;&gt;&#96;将类名包裹起来，例如&#96;ArrayList&lt;String&gt;&#96;</span><br><span class="line"></span><br><span class="line">声明一个保存&#96;String&#96;对象的数组列表:</span><br><span class="line"></span><br><span class="line">&#96;ArrayList&lt;String&gt; list &#x3D; new ArrayList&lt;String&gt;();&#96;</span><br><span class="line"></span><br><span class="line">&#96;Java SE 7&#96;后可以省略右边的类型参数</span><br><span class="line"></span><br><span class="line">&#96;ArrayList&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;();&#96;</span><br><span class="line"></span><br><span class="line">### CRUD</span><br><span class="line"></span><br><span class="line">#### 添加</span><br><span class="line"></span><br><span class="line">使用&#96;add&#96;方法将元素添加到数组列表。</span><br><span class="line"></span><br><span class="line">&#96;list.add(&quot;123&quot;)&#96;</span><br><span class="line"></span><br><span class="line">#### 固定空间</span><br><span class="line"></span><br><span class="line">如果可以估算出数组要存储的元素数量，可以使用</span><br><span class="line"></span><br><span class="line">&#96;list.ensureCapacity(100);&#96;来分配数组空间，这样&#96;add&#96;前&#96;100&#96;个元素就不会重新分配空间。</span><br><span class="line"></span><br><span class="line">初始化时也可以传递初始容量</span><br><span class="line"></span><br><span class="line">&#96;ArrayList&lt;String&gt; list &#x3D; new ArrayList&lt;&gt;(100);&#96;</span><br><span class="line"></span><br><span class="line">#### 消减空间</span><br><span class="line"></span><br><span class="line">&#96;trimToSize&#96;将数组列表的存储容量削减到当前尺寸。</span><br><span class="line"></span><br><span class="line">#### 获取长度 </span><br><span class="line"></span><br><span class="line">使用&#96;size&#96;方法获取数组列表的长度</span><br><span class="line"></span><br><span class="line">#### 添加元素</span><br><span class="line"></span><br><span class="line">&#96;add(E obj)&#96;在列表尾端添加一个元素</span><br><span class="line"></span><br><span class="line">&#96;add(int index, E element)&#96;在指定下标插入一个元素，原有下标及其后元素后移一位。</span><br><span class="line"></span><br><span class="line">#### 设置元素</span><br><span class="line"></span><br><span class="line">&#96;&#96;set(int index, E element)&#96;设置下标&#96;index&#96;为&#96;element&#96;元素。</span><br><span class="line"></span><br><span class="line">#### 获取元素</span><br><span class="line"></span><br><span class="line">&#96;get(int index)&#96;获取元素。</span><br><span class="line"></span><br><span class="line">#### 拷贝到一个新数组</span><br><span class="line"></span><br><span class="line">&#96;toArray&#96;方法</span><br><span class="line"></span><br><span class="line">#### 删除元素</span><br><span class="line"></span><br><span class="line">&#96;remove(index)&#96;</span><br><span class="line"></span><br><span class="line">####  遍历</span><br><span class="line"></span><br><span class="line">可以使用&#96;for each&#96;循环遍历数组</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;java</span><br><span class="line">for(String s: list)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>将<code>otherObject</code>转换为需要的类型变量</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CLassName other &#x3D; (ClassName) otherObject;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>进行域比较，使用<code>==</code>比较基本类型 , 使用<code>equals</code>比较对象域,数组可以使用<code>Arrays.equlas</code>比较,如果所有域都相等,返回<code>true</code>,否则返回<code>false</code>;</li>
+</ol>
+<h3 id="hashCode-方法">hashCode 方法</h3>
+<p><code>hashCode</code>是由一个对象导出的一个<code>int</code>值，散列码是没有规律的。</p>
+<p><code>Object</code>默认的<code>hashCode</code>就是对象内存存储地址。</p>
+<p>如果重新定义<code>equals</code>方法，就必须重新定义<code>hashCode</code>方法，以便用户可以将对象插入到散列表中。</p>
+<p>数组的<code>hashCode</code>可以使用<code>Arrays.hashCode</code>计算。</p>
+<h3 id="toString方法">toString方法</h3>
+<p>类用来返回对象值的字符串。</p>
+<p>Java重载了<code>String</code>类型的<code>+</code>操作，当一个字符串 <code>+</code>一个对象时，会调用该对象的<code>toString()</code>方法。</p>
+<p>数组可以使用<code>Arrays.toString()</code>来展示。</p>
+<h3 id="clone">clone</h3>
+<p>创建一个对象的副本。</p>
+<h2 id="泛型数组">泛型数组</h2>
+<p>使用底层数组必须在使用时确定数组的大小，使用<code>ArrayList</code>类可以不用关心底层细节，类会自动调节数组容量。</p>
+<p><code>ArrayList</code>是一个采用了<code>类型参数</code>的泛型类(<code>generic class)</code>。即可以指定数组列表保存的元素对象类型。</p>
+<p>使用<code>&lt;&gt;</code>将类名包裹起来，例如<code>ArrayList&lt;String&gt;</code></p>
+<p>声明一个保存<code>String</code>对象的数组列表:</p>
+<p><code>ArrayList&lt;String&gt; list = new ArrayList&lt;String&gt;();</code></p>
+<p><code>Java SE 7</code>后可以省略右边的类型参数</p>
+<p><code>ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();</code></p>
+<h3 id="CRUD">CRUD</h3>
+<h4 id="添加">添加</h4>
+<p>使用<code>add</code>方法将元素添加到数组列表。</p>
+<p><code>list.add(&quot;123&quot;)</code></p>
+<h4 id="固定空间">固定空间</h4>
+<p>如果可以估算出数组要存储的元素数量，可以使用</p>
+<p><code>list.ensureCapacity(100);</code>来分配数组空间，这样<code>add</code>前<code>100</code>个元素就不会重新分配空间。</p>
+<p>初始化时也可以传递初始容量</p>
+<p><code>ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;(100);</code></p>
+<h4 id="消减空间">消减空间</h4>
+<p><code>trimToSize</code>将数组列表的存储容量削减到当前尺寸。</p>
+<h4 id="获取长度">获取长度</h4>
+<p>使用<code>size</code>方法获取数组列表的长度</p>
+<h4 id="添加元素">添加元素</h4>
+<p><code>add(E obj)</code>在列表尾端添加一个元素</p>
+<p><code>add(int index, E element)</code>在指定下标插入一个元素，原有下标及其后元素后移一位。</p>
+<h4 id="设置元素">设置元素</h4>
+<p>``set(int index, E element)<code>设置下标</code>index<code>为</code>element`元素。</p>
+<h4 id="获取元素">获取元素</h4>
+<p><code>get(int index)</code>获取元素。</p>
+<h4 id="拷贝到一个新数组">拷贝到一个新数组</h4>
+<p><code>toArray</code>方法</p>
+<h4 id="删除元素">删除元素</h4>
+<p><code>remove(index)</code></p>
+<h4 id="遍历">遍历</h4>
+<p>可以使用<code>for each</code>循环遍历数组</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(String s: list)</span><br><span class="line">&#123;</span><br><span class="line">	...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="历史遗留代码">历史遗留代码</h3>
 <p>添加<code>@SuppressWamings(&quot;unchecked&quot;)</code>并使用强制类型转换。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>) ArrayList&lt;Employee&gt; result =</span><br><span class="line">(ArrayList&lt;Employee&gt;) employeeDB.find(query) ; <span class="comment">// yields another warning</span></span><br></pre></td></tr></table></figure>
@@ -444,6 +492,7 @@ T可以时任意Java类型，包括私有类型。<br>
 <p>描述类的构造器</p>
 <p><code>getConstructors</code>返回所有<code>public</code>构造器</p>
 <p><code>getDeclaredConstructors</code>全部构造器（包括私有，默认，公有，保护，但不包括超类的构造器）</p>
+<p>可以通过<code>newInstance(Object[] args)</code>创建一个对象实例</p>
 <h3 id="Field">Field</h3>
 <p>描述类的域</p>
 <p><code>getFields</code>返回所有<code>public</code>域</p>
@@ -457,7 +506,9 @@ T可以时任意Java类型，包括私有类型。<br>
 <p><code>getMethods</code>返回所有<code>public</code>方法</p>
 <p><code>getDeclaredMethods</code>全部方法（包括私有，默认，公有，保护，但不包括超类的方法）</p>
 <p><code>getName</code>返回域名称</p>
-<h3 id="运行时反射">运行时反射</h3>
+<h3 id="数组反射">数组反射</h3>
+<p>通过<code>class.getComponentType</code>获取数组类内部类型。</p>
+<p>通过<code>Array.newInstance(Class&lt;?&gt; componentType, int length)</code>创建一个对象</p>
 
 </div>
 
@@ -497,7 +548,7 @@ T可以时任意Java类型，包括私有类型。<br>
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2020-07-08</div>
+      <div>2020-07-14</div>
     </div>
   </div>
 
