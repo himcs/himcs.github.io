@@ -192,6 +192,12 @@ function sidebar_toggle() {
 <h2 id="答案">答案</h2>
 <p>恢复文件</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn revert --depth&#x3D;infinity index.html</span><br></pre></td></tr></table></figure>
+<h2 id="Checksum-错误">Checksum 错误</h2>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svn: E155017: Checksum mismatch while updating &#39;&#x2F;EMRCV5&#x2F;BIN_ARM&#x2F;emrc_main&#39;:</span><br></pre></td></tr></table></figure>
+<p>解决方法<br>
+删除文件,然后更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn update --set-depth empty</span><br><span class="line">svn update --set-depth infinity</span><br></pre></td></tr></table></figure>
+<p>注意第一步， 这会清理文件， 如果比较重要， 请先备份。</p>
 
 </div>
 
@@ -231,7 +237,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2020-07-25</div>
+      <div>2020-07-29</div>
     </div>
   </div>
 
