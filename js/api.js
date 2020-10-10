@@ -1,5 +1,5 @@
 var http = {
-    baseUrl: "http://ftp6414072.host120.sanfengyun.cn/",
+    baseUrl: "https://service-72fado3m-1251829736.gz.apigw.tencentcs.com/",
     getText(api) {
         let fullUrl = this.fullUrl(api);
         return new Promise(resolve => {
@@ -38,7 +38,7 @@ var http = {
 
 
 var apiConstant = {
-    ideacode: "curl.php",
+    ideacode: "release/start-test-1602311551",
     ssr: "curl.php",
 }
 
