@@ -38,7 +38,7 @@ var http = {
 
 
 var apiConstant = {
-    ideacode: "/api/ideacode",
+    ideacode: "curl.php",
     ssr: "curl.php",
 }
 
