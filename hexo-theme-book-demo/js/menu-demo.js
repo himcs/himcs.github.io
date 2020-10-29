@@ -50,7 +50,7 @@ function unit_invalid() {
 
 Paragraph
 
-![image](/hexo-theme-book-demo/favicon.ico)
+<img src="/images//hexo-theme-book-demo/favicon.ico"  alt="" />
 
 \`\`\`
 code

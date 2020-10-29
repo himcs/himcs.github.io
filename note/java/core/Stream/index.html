@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/note/java/core/0basic">Java基础</a></li>
 <li><a href="/note/java/core/1ObjectsAndClasses">对象与实例</a></li>
 <li><a href="/note/java/core/2Extends">继承</a></li>
+<li><a href="/note/java/core/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%9F%BA%E7%A1%80">多线程-基础</a></li>
+<li><a href="/note/java/core/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8E%9F%E7%90%86">多线程-原理</a></li>
 <li><a href="/note/docker/jar%E6%96%87%E4%BB%B6%E9%83%A8%E7%BD%B2">docker 部署</a></li>
 <li><a href="/note/linux/nginx">nginx 映射</a></li>
 </ul>
@@ -189,44 +191,164 @@ function sidebar_toggle() {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <h1 id="Stream-库">Stream 库</h1>
-<p>在<code>Java SE 8</code>引用，用以“做什么而不是怎么做“来处理集合。</p>
-<h2 id="迭代-》流操作">迭代=》流操作</h2>
-<p>例如一段迭代字符串数组，并计算符合要求的元素。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">baseCount</span><span class="params">(String[] strings)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(String s : strings)</span><br><span class="line">    &#123;</span><br><span class="line">        count++;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>使用流操作</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">streamCount</span><span class="params">(String[] strings)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> count = Arrays.stream(strings).count();</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>stream</code>还可以并行处理和计数</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">streamCount</span><span class="params">(String[] strings)</span></span>&#123;</span><br><span class="line">    <span class="keyword">long</span> count = Arrays.stream(strings).count();</span><br><span class="line">    System.out.println(count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>流和集合的差异：</p>
-<ol>
-<li>流并不存储元素</li>
-<li>流操作不会修改原始数据</li>
-<li>流操作时惰性执行。即直到需要其结果，操作才会执行，因此我们可以操作无限流。</li>
-</ol>
-<h2 id="典型流程">典型流程</h2>
-<p>如下所示，流的操作：</p>
-<ol>
-<li>
-<p>创建一个流</p>
-</li>
-<li>
-<p>将初始流转换为其他流的中间操作，可以有多个步骤</p>
-</li>
-<li>
-<p>终止操作，产生结果。这个操作会执行之前的惰性操作，这个流结束。</p>
-</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//返回长度大于目标长度的元素数量。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">streamFilterCount</span><span class="params">(String[] strings, <span class="keyword">int</span> minLength)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">long</span> count = Arrays.asList(strings).stream().filter(x -&gt; x.length() &gt; minLength).count();</span><br><span class="line">        System.out.println(count);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h2 id="创建流的API">创建流的API</h2>
-<p><code>Collection</code>接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">default</span> Stream&lt;E&gt; <span class="title">stream</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">default</span> Stream&lt;E&gt; <span class="title">parallelStream</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span>&lt;T&gt; Stream&lt;T&gt; <span class="title">of</span><span class="params">(T... values)</span></span></span><br></pre></td></tr></table></figure>
-<p><code>Arrays</code>方法</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">Stream&lt;T&gt; <span class="title">stream</span><span class="params">(T[] array)</span></span></span><br></pre></td></tr></table></figure>
-<h2 id="流操作API">流操作API</h2>
-<p><code>Stream&lt;T&gt; </code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stream&lt;T&gt; <span class="title">filter</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> T&gt; predicate)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">count</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
-<h2 id="filter-map-flatMap">filter map flatMap</h2>
+  <h2 id="概述">概述</h2>
+<p><code>Java SE 8</code>引入的<code>java.util.stream</code>包,用于为可能并行处理批量操作建立声明式的表达式.它充分利用了<code>lambda</code>表达式.</p>
+<h2 id="流的使用">流的使用</h2>
+<p>例如对满足过滤条件的单词进行计数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; words = Arrays.asList(<span class="string">"a"</span>, <span class="string">"bc"</span>);</span><br><span class="line"><span class="keyword">long</span> count =  words.stream().filter(w-&gt;w.length()&gt;<span class="number">1</span>).count();</span><br></pre></td></tr></table></figure>
+<p>如果将<code>stream()</code>修改为<code>parallelStream()</code>,就可以让流库以并行方式进行过滤和计数,多核处理下提高性能.</p>
+<p>使用流的关键思想使客户端代码告诉流库该做什么,怎么做由流库实现.</p>
+<h2 id="流的生命周期">流的生命周期</h2>
+<p>每个流都有一个创建来源,若干个中间操作,以及一个终止操作.</p>
+<h3 id="流的创建">流的创建</h3>
+<p>常见流创建方法：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>Collection.stream()</code></td>
+<td style="text-align:left">使用一个集合的元素创建一个流。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Stream.of(T... values)</code></td>
+<td style="text-align:left">使用传递给工厂方法的参数创建一个流。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Stream.empty()</code></td>
+<td style="text-align:left">创建一个空流。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Stream.generate(Supplier&lt;T&gt; s)</code></td>
+<td style="text-align:left">使用一个生成器函数创建一个无限流。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Stream.iterate(T first, BinaryOperator&lt;T&gt; f)</code></td>
+<td style="text-align:left">创建一个包含序列 first, f(first), f(f(first)), … 的无限流</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>IntStream.range(lower, upper)</code></td>
+<td style="text-align:left">创建一个由下限到上限（不含）之间的元素组成的 IntStream。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>IntStream.rangeClosed(lower, upper)</code></td>
+<td style="text-align:left">创建一个由下限到上限（含）之间的元素组成的 IntStream。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Arrays.stream(T... values)</code></td>
+<td style="text-align:left">同Stream.of(T… values)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="中间操作">中间操作</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作</th>
+<th style="text-align:left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>filter(Predicate&lt;T&gt;)</code></td>
+<td style="text-align:left">产生一个流，包含匹配的元素</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>map(Function&lt;? super T, ? extends R&gt; mapper)</code></td>
+<td style="text-align:left">产生一个流，每个元素由<code>mapper</code>转换上一个流元素产生</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt; mapper);</code></td>
+<td style="text-align:left">产生一个流，将流元素进行平铺展开并连接到一起，连接后的新流应用<code>mapper</code>([[“a”,“b”,“c”],[“d”]]=&gt;[“a”,“b”,“c”,“d”])</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>distinct()</code></td>
+<td style="text-align:left">删除重复元素</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sorted()</code></td>
+<td style="text-align:left">按自然顺序排序的流元素</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>sorted(Comparator&lt;? super T&gt; comparator)</code></td>
+<td style="text-align:left">按给定比较器排序的流元素</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>limit(long maxSize)</code></td>
+<td style="text-align:left">阶段到指定长度</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>skip(long n);</code></td>
+<td style="text-align:left">丢弃前n个元素</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>peek(Consumer&lt;? super T&gt; action);</code></td>
+<td style="text-align:left">产生一个流，获取的元素会传递给action</td>
+</tr>
+</tbody>
+</table>
+<p>中间操作始终使惰性的，可进一步划分为无状态和有状态。无状态例如(map,filter),有状态例如(sorted,distinct)</p>
+<h3 id="终止操作">终止操作</h3>
+<p>终止操作会结束流管道，并产生结果</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">操作</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>forEach(Consumer&lt;T&gt;)</code></td>
+<td style="text-align:left">将提供的操作应用于流的每个元素。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>toArray</code></td>
+<td style="text-align:left">使用流元素创建一个数组。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>reduce(T identity, BinaryOperator&lt;T&gt;)</code></td>
+<td style="text-align:left">将流的元素聚合为一个汇总值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>collect(...)</code></td>
+<td style="text-align:left">将流的元素聚合到一个汇总结果容器中。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>min(Comparator&lt;? super T&gt;)</code></td>
+<td style="text-align:left">最小值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>max(Comparator&lt;? super T&gt;)</code></td>
+<td style="text-align:left">最大值</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>count</code></td>
+<td style="text-align:left">流大小</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>{any,all,none}Match(Predicate&lt;T&gt;)</code></td>
+<td style="text-align:left">返回流的任何/所有元素是否与提供的预期相匹配。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Optional&lt;T&gt;  findFirst</code></td>
+<td style="text-align:left">返回流的第一个元素</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Optional&lt;T&gt;  findAny</code></td>
+<td style="text-align:left">返回流的任何元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Optional">Optional</h2>
+<p><code>Optional&lt;T&gt; </code>是一个包装器</p>
+<p><code>get</code>方法，如果包装对象为空会抛出异常，</p>
+<p>可以使用<code>orElse</code>提供默认值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Stream s = Stream.iterate(<span class="number">1</span>, t -&gt; t + <span class="number">1</span>).limit(<span class="number">10</span>);</span><br><span class="line">Optional first = s.findFirst();</span><br><span class="line">first.orElse(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
 
 </div>
 
@@ -266,7 +388,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2020-10-10</div>
+      <div>2020-10-29</div>
     </div>
   </div>
 

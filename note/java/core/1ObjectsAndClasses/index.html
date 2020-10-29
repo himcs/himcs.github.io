@@ -73,6 +73,8 @@ document.addEventListener('DOMContentLoaded', function () {
 <li><a href="/note/java/core/0basic">Java基础</a></li>
 <li><a href="/note/java/core/1ObjectsAndClasses">对象与实例</a></li>
 <li><a href="/note/java/core/2Extends">继承</a></li>
+<li><a href="/note/java/core/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%9F%BA%E7%A1%80">多线程-基础</a></li>
+<li><a href="/note/java/core/%E5%A4%9A%E7%BA%BF%E7%A8%8B-%E5%8E%9F%E7%90%86">多线程-原理</a></li>
 <li><a href="/note/docker/jar%E6%96%87%E4%BB%B6%E9%83%A8%E7%BD%B2">docker 部署</a></li>
 <li><a href="/note/linux/nginx">nginx 映射</a></li>
 </ul>
@@ -229,17 +231,17 @@ function sidebar_toggle() {
 <p>应该尽可能减少依赖关系，如果A不知道B，B改变就不会影响到A。（低耦合）。</p>
 <p>聚合关系，例如一个订单包含多个<code>Item</code>。聚合关系就是<code>A</code>对象包含<code>B</code>对象。</p>
 <p>继承，就是面向对象的继承关系，B扩展与A，可以说B继承于A。</p>
-<p><img src="image-20200518230029036.png" alt="image-20200518230029036"></p>
+<img src="/images/image-20200518230029036.png"  alt="" />
 <h2 id="预定义类">预定义类</h2>
 <p>Java类库预先定义好的类。</p>
 <h3 id="对象与变量">对象与变量</h3>
 <p>例如创建一个<code>Date</code>对象，</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Date date = <span class="keyword">new</span> Date();</span><br></pre></td></tr></table></figure>
 <p>执行完这条语句,变量date引用内存中新创建的<code>Date</code>对象。</p>
-<p><img src="image-20200518230345037.png" alt="image-20200518230345037"></p>
+<img src="/images/image-20200518230345037.png"  alt="" />
 <p>如果另一个变量也引用新创建<code>Date</code>对象，两个变量会引用同一份对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Date date = <span class="keyword">new</span> Date();</span><br><span class="line">Date date2 = date;</span><br></pre></td></tr></table></figure>
-<p><img src="image-20200518230741095.png" alt="image-20200518230741095"></p>
+<img src="/images/image-20200518230741095.png"  alt="" />
 <p>可以显式的将对象变量设置为<code>null</code>表示此变量目前没有引用任何对象。</p>
 <p>运行下面的语句会抛出一个<code>java.lang.NullPointerException</code>异常。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">date = <span class="keyword">null</span>;</span><br><span class="line">System.out.println(date.toString());</span><br></pre></td></tr></table></figure>
@@ -308,7 +310,7 @@ Yields the date that is n days after or before this date.</p>
 <p>通过方法调用而不是将实例域设置为<code>public</code>可以对存取过程进行控制，否则字段的修改将无迹可寻。</p>
 <h3 id="不要引用对象">不要引用对象</h3>
 <p>类返回一个引用对象时，如果不使用<code>clone</code>方法，我们对返回对象的修改就是修改类的引用对象，因为类字段和返回值引用了同一个对象。</p>
-<p><img src="image-20200519001401037.png" alt="image-20200519001401037"></p>
+<img src="/images/image-20200519001401037.png"  alt="" />
 <p>可以使用<code>clone</code>方法，返回一个对象的副本，此时修改是独立的。</p>
 <h3 id="私有方法">私有方法</h3>
 <p>使用关键字<code>private</code>即可，私有方法和字段只有类本身的方法才可以调用。</p>
@@ -361,9 +363,9 @@ Yields the date that is n days after or before this date.</p>
 </ol>
 <p>按值调用表示接受的时调用者提供的值，Java中为8种基本类型，</p>
 <p>方法会创建一个值的本地副本，即在方法种修改参数值，不会影响调用者提供的值</p>
-<p><img src="image-20200519004351367.png" alt="image-20200519004351367"></p>
+<img src="/images/image-20200519004351367.png"  alt="" />
 <p>按引用调用表示接受的时调用者提供的变量地址，函数用变量来接受这个变量地址，表示为引用这个对象，和调用者提供的变量时同一个对象，所以在行书中修改引用类型会影响外部对象的是兼职。</p>
-<p><img src="image-20200519004445220.png" alt="image-20200519004445220"></p>
+<img src="/images/image-20200519004445220.png"  alt="" />
 <p>总结：</p>
 <ul>
 <li>一个方法不能修改一个基本数据类型的参数（即数值型或布尔型）。</li>
@@ -532,7 +534,7 @@ Java中用参数类型区分方法。</p>
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2020-10-10</div>
+      <div>2020-10-29</div>
     </div>
   </div>
 
