@@ -11,7 +11,7 @@
 
     <title>
         
-          中文測試 - book-note
+          note/java/idea/IDEA插件开发 - book-note
         
     </title>
 
@@ -199,15 +199,44 @@ function sidebar_toggle() {
         </div>
         <div class="book-content">
           <div class="book-post">
-  <p>This is a Chinese test post.</p>
-<p>善我王上魚、產生資西員合兒臉趣論。畫衣生這著爸毛親可時，安程幾？合學作。觀經而作建。都非子作這！法如言子你關！手師也。</p>
-<p>以也座論頭室業放。要車時地變此親不老高小是統習直麼調未，行年香一？</p>
-<p>就竟在，是我童示讓利分和異種百路關母信過明驗有個歷洋中前合著區亮風值新底車有正結，進快保的行戰從：弟除文辦條國備當來際年每小腳識世可的的外的廣下歌洲保輪市果底天影；全氣具些回童但倒影發狀在示，數上學大法很，如要我……月品大供這起服滿老？應學傳者國：山式排只不之然清同關；細車是！停屋常間又，資畫領生，相們制在？公別的人寫教資夠。資再我我！只臉夫藝量不路政吃息緊回力之；兒足灣電空時局我怎初安。意今一子區首者微陸現際安除發連由子由而走學體區園我車當會，經時取頭，嚴了新科同？很夫營動通打，出和導一樂，查旅他。坐是收外子發物北看蘭戰坐車身做可來。道就學務。</p>
-<p>國新故。</p>
-<blockquote>
-<p>工步他始能詩的，裝進分星海演意學值例道……於財型目古香亮自和這乎？化經溫詩。只賽嚴大一主價世哥受的沒有中年即病行金拉麼河。主小路了種就小為廣不？</p>
-</blockquote>
-<p><em>From <a href="http://www.richyli.com/tool/loremipsum/" target="_blank" rel="noopener">亂數假文產生器 - Chinese Lorem Ipsum</a></em></p>
+  <h2 id="学习方法">学习方法</h2>
+<p>参考官网资料和<code>DEMO</code></p>
+<p>参考第三方<code>DEMO</code></p>
+<ul>
+<li><a href="https://jetbrains.org/intellij/sdk/docs/intro/welcome.html" target="_blank" rel="noopener">https://jetbrains.org/intellij/sdk/docs/intro/welcome.html</a></li>
+<li><a href="https://github.com/JetBrains/intellij-sdk-code-samples" target="_blank" rel="noopener">https://github.com/JetBrains/intellij-sdk-code-samples</a></li>
+<li><a href="https://github.com/Haehnchen/idea-php-laravel-plugin" target="_blank" rel="noopener">https://github.com/Haehnchen/idea-php-laravel-plugin</a></li>
+</ul>
+<h2 id="核心概念">核心概念</h2>
+<h3 id="Action">Action</h3>
+<p>可以通过快捷键或菜单触发, 继承<code>AnAction</code>,实现方法实现事件<br>
+<code>update</code>方法里通过<code> e.getPresentation().setEnabledAndVisible(project != null);</code>设置开启<br>
+<code>actionPerformed</code>实现事件回调</p>
+<p>在<code>resources/META-INFO/plugin.xml</code>配置<code>action</code></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">actions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">id</span>=<span class="string">"Thinkphp.openBrowser"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">class</span>=<span class="string">"io.himcs.idea.thinkphp.action.TplAction"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">text</span>=<span class="string">"ThinkUrlParser"</span></span></span><br><span class="line"><span class="tag">            <span class="attr">description</span>=<span class="string">"ThinkUrlParser"</span></span></span><br><span class="line"><span class="tag">    &gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">add-to-group</span> <span class="attr">group-id</span>=<span class="string">"ToolsMenu"</span> <span class="attr">anchor</span>=<span class="string">"last"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">keyboard-shortcut</span> <span class="attr">first-keystroke</span>=<span class="string">"control alt q"</span> <span class="attr">keymap</span>=<span class="string">"$default"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">action</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">actions</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="PSI">PSI</h3>
+<p>解析后的结果, 不同语言PSI不同</p>
+<h3 id="Editor">Editor</h3>
+<p>编辑器</p>
+<h3 id="Project">Project</h3>
+<p>当前项目</p>
+<p>一般回有响应的<code>Manager</code>获取响应的管理实例</p>
+<h2 id="扩展点">扩展点</h2>
+<p><code>extensions</code>,实现功能主要区域</p>
+<h3 id="completion-contributor">completion.contributor</h3>
+<p>代码完成扩展</p>
+<p>例如</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--代码自动完成--&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">completion.contributor</span> <span class="attr">language</span>=<span class="string">"PHP"</span></span></span><br><span class="line"><span class="tag">                               <span class="attr">implementationClass</span>=<span class="string">"io.himcs.idea.thinkphp.codeInsight.completion.ThinkPHPCompletionContributor"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="codeInsight-lineMarkerProvider">codeInsight.lineMarkerProvider</h3>
+<p>代码标记扩展</p>
+<h3 id="webBrowserUrlProvider">webBrowserUrlProvider</h3>
+<p>浏览器打开URL提供者扩展</p>
+<h3 id="projectService">projectService</h3>
+<p>项目service,相当于<code>MVC</code>中的<code>M</code></p>
+<h3 id="projectConfigurable">projectConfigurable</h3>
+<p>项目配置,相当于<code>MVC</code>中的<code>Controller</code></p>
+<h2 id="项目参考">项目参考</h2>
+<p><a href="https://github.com/himcs/think" target="_blank" rel="noopener">https://github.com/himcs/think</a></p>
 
 </div>
 
@@ -247,7 +276,7 @@ function sidebar_toggle() {
     <!-- Author title -->
     <div class="author-title">
       <div>mcs</div>
-      <div>2013-12-24</div>
+      <div>2020-11-11</div>
     </div>
   </div>
 
